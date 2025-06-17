@@ -1,0 +1,9 @@
+[build]
+  base    = "frontend"
+  publish = "frontend/out"
+  command = "npm run build && npm run export"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://your-api-host.onrender.com/api/:splat"
+  status = 200
