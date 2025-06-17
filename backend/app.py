@@ -1,30 +1,19 @@
-from flask import Flask, render_template, request
-import requests
-import config as config
+from flask import Flask
+from flask_cors import CORS
+from sqlalchemy import text
+from models import db
+from config import *
+from api import api
 
 app = Flask(__name__)
+app.config.from_pyfile("config.py")
 
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
-@app.route("/", methods=["GET", "POST"])
-def home():
-    translation_results = None
+db.init_app(app)
 
-    if request.method == "POST":
-        word = request.form.get("word")
-        if word:
-            params = {
-                "key": config.YANDEX_API_KEY,
-                "lang": config.YANDEX_LANG_PAIR,
-                "text": word,
-            }
-            response = requests.get(config.YANDEX_API_URL, params=params)
-            if response.status_code == 200:
-                translation_results = response.json()
-            else:
-                translation_results = {"error": "Failed to fetch translations"}
+# Create tables on startup
+with app.app_context():
+    db.create_all()
 
-    return render_template("home.html", result=translation_results)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
+app.register_blueprint(api)
