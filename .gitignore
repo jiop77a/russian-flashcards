@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+
+# Virtual environment
+venv/
+
+# Environment variables / API keys
+.env
+config.py  # if you're committing elsewhere and want to keep config private
+
+# VS Code settings (optional)
+.vscode/
