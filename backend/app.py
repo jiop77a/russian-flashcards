@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import requests
-import config
+import config as config
 
 app = Flask(__name__)
 
