@@ -1,5 +1,5 @@
 import React from "react";
-import { Translation } from "@/lib/api";
+import { Translation } from "@/types";
 
 interface Props {
   translation: Translation;
@@ -7,11 +7,24 @@ interface Props {
 }
 
 export default function TranslationResult({ translation, onSave }: Props) {
+  const handlePlay = () => {
+    const utterance = new SpeechSynthesisUtterance(translation.russian);
+    utterance.lang = "ru-RU";
+    window.speechSynthesis.speak(utterance);
+  };
+
   return (
-    <div className="border rounded-2xl p-4 shadow-sm bg-white hover:shadow-md transition">
+    <div className="border rounded-2xl p-4 mb-4 shadow-sm bg-white hover:shadow-md transition">
       <div className="flex justify-between items-start mb-2">
-        <div className="text-xl font-bold text-blue-800">
+        <div className="text-xl font-bold text-blue-800 flex items-center gap-2">
           {translation.russian}
+          <button
+            onClick={handlePlay}
+            aria-label={`Play pronunciation of ${translation.russian}`}
+            className="text-sm px-2 py-1 text-gray-800 rounded hover:bg-gray-300 transition"
+          >
+            🔊
+          </button>
         </div>
         {onSave && (
           <button

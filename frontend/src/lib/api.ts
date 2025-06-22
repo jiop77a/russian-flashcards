@@ -1,21 +1,5 @@
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-export interface Translation {
-  russian: string;
-  glosses: string[];
-  pos?: string;
-  aspect?: string;
-  synonyms: string[];
-  frequency?: number;
-}
-
-export interface Flashcard {
-  id: number;
-  english: string;
-  russian: string;
-  meaning?: string;
-  pos?: string;
-}
+import { Translation, Flashcard } from "@/types";
 
 export async function fetchTranslations(
   word: string

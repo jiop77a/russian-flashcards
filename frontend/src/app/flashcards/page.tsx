@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchFlashcards, Flashcard } from "@/lib/api";
+import { fetchFlashcards } from "@/lib/api";
+import { Flashcard } from "@/types";
 import FlashcardCard from "@/components/FlashcardCard";
 
 export default function FlashcardsPage() {

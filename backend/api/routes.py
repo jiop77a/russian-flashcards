@@ -28,7 +28,7 @@ def translate():
                 {
                     "russian": tr["text"],
                     "glosses": [m["text"] for m in tr.get("mean", [])] or [],
-                    "pos": tr.get("pos"),
+                    "pos": tr.get("pos") or "unknown",
                     "aspect": tr.get("asp"),
                     "synonyms": [s["text"] for s in tr.get("syn", [])] or [],
                     "frequency": tr.get("fr"),
