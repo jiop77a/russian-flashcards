@@ -44,11 +44,12 @@ def save_flashcard():
     english = data.get("english")
     russian = data.get("russian")
     meaning = data.get("meaning")
+    pos = data.get("pos")
 
     if not english or not russian:
         return jsonify({"error": "Missing required fields"}), 400
 
-    card = Flashcard(english=english, russian=russian, meaning=meaning)
+    card = Flashcard(english=english, russian=russian, meaning=meaning, pos=pos)
     db.session.add(card)
     db.session.commit()
 
@@ -65,6 +66,7 @@ def get_flashcards():
                 "english": card.english,
                 "russian": card.russian,
                 "meaning": card.meaning,
+                "pos": card.pos,
             }
             for card in flashcards
         ]

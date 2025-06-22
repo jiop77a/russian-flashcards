@@ -14,6 +14,7 @@ export interface Flashcard {
   english: string;
   russian: string;
   meaning?: string;
+  pos?: string;
 }
 
 export async function fetchTranslations(
@@ -34,6 +35,7 @@ export async function saveTranslation(word: string, t: Translation) {
       english: word,
       russian: t.russian,
       meaning: t.glosses.join(", "),
+      pos: t.pos,
     }),
   });
 
