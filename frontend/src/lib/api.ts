@@ -9,6 +9,13 @@ export interface Translation {
   frequency?: number;
 }
 
+export interface Flashcard {
+  id: number;
+  english: string;
+  russian: string;
+  meaning?: string;
+}
+
 export async function fetchTranslations(
   word: string
 ): Promise<{ translations: Translation[] }> {
@@ -31,5 +38,13 @@ export async function saveTranslation(word: string, t: Translation) {
   });
 
   if (!res.ok) throw new Error("Failed to save flashcard");
+  return res.json();
+}
+
+export async function fetchFlashcards(): Promise<Flashcard[]> {
+  const res = await fetch(`${API_BASE}/flashcards`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch flashcards");
+  }
   return res.json();
 }

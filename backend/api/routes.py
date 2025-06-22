@@ -53,3 +53,19 @@ def save_flashcard():
     db.session.commit()
 
     return jsonify({"message": "Flashcard saved successfully"})
+
+
+@api.route("/flashcards", methods=["GET"])
+def get_flashcards():
+    flashcards = Flashcard.query.all()
+    return jsonify(
+        [
+            {
+                "id": card.id,
+                "english": card.english,
+                "russian": card.russian,
+                "meaning": card.meaning,
+            }
+            for card in flashcards
+        ]
+    )
