@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Flashcard } from "@/types";
 import { fetchFlashcards } from "@/lib/api";
+import { speakRussian } from "@/utils/speech";
 
 export default function FlashcardViewer() {
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
@@ -41,15 +42,27 @@ export default function FlashcardViewer() {
       </div>
 
       <div className="mt-4 flex flex-col items-center">
-        <p className="text-gray-600 text-sm mb-2">
-          {flipped && currentCard.meaning}
-        </p>
-        {flipped && currentCard.pos && (
-          <span className="text-xs text-gray-500">({currentCard.pos})</span>
+        {flipped && (
+          <>
+            <button
+              onClick={() => speakRussian(currentCard.russian)}
+              className="mb-2 text-sm px-3 py-1 bg-blue-100 text-blue-800 rounded hover:bg-blue-200 transition"
+            >
+              🔊 Listen
+            </button>
+            {currentCard.meaning && (
+              <p className="text-gray-600 text-sm mb-1">
+                {currentCard.meaning}
+              </p>
+            )}
+            {currentCard.pos && (
+              <span className="text-xs text-gray-500">({currentCard.pos})</span>
+            )}
+          </>
         )}
         <button
           onClick={handleNext}
-          className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         >
           Next
         </button>
