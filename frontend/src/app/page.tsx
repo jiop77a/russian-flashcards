@@ -4,7 +4,6 @@ import { useState } from "react";
 import { fetchTranslations, saveTranslation } from "../lib/api";
 import type { Translation } from "@/types";
 import TranslationResult from "@/components/TranslationResult";
-import Navbar from "@/components/Navbar";
 import type { PartOfSpeech } from "@/types";
 
 export default function Home() {
@@ -50,7 +49,6 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
       <main style={{ padding: "2rem" }}>
         <form
           onSubmit={(e) => {
